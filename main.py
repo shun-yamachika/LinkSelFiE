@@ -9,6 +9,7 @@ if __name__ == '__main__':
 
     # Run in parallel
     p = Pool(4)
+#    noise_model_names = ["Depolar"]
     noise_model_names = ["Depolar","Dephase","AmplitudeDamping","BitFlip"]
     algorithm_names = ["Vanilla1 NB", "Vanilla20 NB" ,"LinkSelFiE","Vanilla NB"]
 #    algorithm_names = ["Vanilla NB","LinkSelFiE","Succ. Elim. NB",]

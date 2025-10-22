@@ -659,7 +659,8 @@ def plot_accuracy_vs_path_num(path_num_list, algorithm_names, noise_model, repea
                 'noise_model': noise_model,
                 'repeat': repeat,
                 'bounces': bounces,
-                'sample_times': sample_times
+                'sample_times': sample_times,
+                'gap': 0.04
             },
             'data': {}
         }
@@ -674,16 +675,16 @@ def plot_accuracy_vs_path_num(path_num_list, algorithm_names, noise_model, repea
 
         for path_num in path_num_list:
             path_list = list(range(1, path_num + 1))
+            # Use same fidelity generation method as plot_cost_vs_path_num
+            fidelity_list = generate_fidelity_list_fix_gap(path_num, 0.04)
 
             for algorithm_name in algorithm_names:
                 correct_rate = 0.0
                 acc_list = []
                 raw_results_list = []
-                fidelity_lists_for_path_num = []
                 for i in range(repeat):  # Repeat several times and get average
                     print(f"Evaluating algorithm: {algorithm_name}, repeat: {i+1}/{repeat}...")
 
-                    fidelity_list = generate_fidelity_list_random(path_num)
                     print(
                         f"Initializing network with {path_num} paths: {path_list}, true fidelities: {fidelity_list}, noise model: {noise_model}\n"
                     )
@@ -694,7 +695,6 @@ def plot_accuracy_vs_path_num(path_num_list, algorithm_names, noise_model, repea
                     print(f"Finish repeat {i+1}/{repeat}, correctness: {correctness}")
                     correct_rate += correctness
                     acc_list.append(float(correctness))
-                    fidelity_lists_for_path_num.append(fidelity_list)
                     raw_results_list.append({
                         'correctness': correctness,
                         'cost': cost,
@@ -703,7 +703,7 @@ def plot_accuracy_vs_path_num(path_num_list, algorithm_names, noise_model, repea
                 correct_rate /= repeat
                 print(f"Finish evaluating algorithm {algorithm_name}, correct rate: {correct_rate}\n")
                 results['data'][algorithm_name]['accs_per_path_num'].append(acc_list)
-                results['data'][algorithm_name]['fidelity_lists'].append(fidelity_lists_for_path_num)
+                results['data'][algorithm_name]['fidelity_lists'].append(fidelity_list)
                 results['data'][algorithm_name]['raw_results'].append(raw_results_list)
 
         # Store the results in file

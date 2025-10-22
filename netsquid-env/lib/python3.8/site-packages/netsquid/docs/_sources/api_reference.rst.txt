@@ -1,0 +1,25 @@
+NetSquid package
+================
+
+In the schematic below the sub-packages that make up the NetSquid package are shown stacked in relation to each other and the pyDynAA package dependency.
+The main classes and modules in each (sub-)package are highlighted, and their relationships in terms of inheritance, composition, and aggregation are also shown.
+
+.. image:: _static/netsquidstack_detailed.png
+    :align: center
+    :width: 500px
+
+The subpackages are documented in the next sections, including example snippets.
+This documentation is automatically generated using Python docstrings
+(using the `autodoc extension <http://www.sphinx-doc.org/en/master/ext/autodoc.html>`_).
+
+.. toctree::
+    :caption: Subpackages
+    :maxdepth: 2
+
+    netsquid.qubits
+    netsquid.components
+    netsquid.components.models
+    netsquid.nodes
+    netsquid.protocols
+    netsquid.util
+    netsquid.examples
